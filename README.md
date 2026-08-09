@@ -1,10 +1,6 @@
 # Prediksi Klaim Asuransi Kesehatan dengan GBDT + Explainable AI
 
 Arsip kode dan hasil untuk **Data Science Competition — Mathematical Challenge Festival ITB 2026**.
-
-**Tim TehTarikMakNani** — Ardra Chandra Satriyo, Muhammad Rayhan Ayman Mangku, Fakhrul Zidan Nurrohman
-**Hasil:** MAPE portofolio 0,22877 di Kaggle — peringkat 18 dari 296 tim.
-
 ---
 
 ## Masalah
