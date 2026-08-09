@@ -79,11 +79,26 @@ Grafik: `outputs/shap_*.png`, ringkasan naratif di [`outputs/xai_report.txt`](ou
 
 | File | Isi |
 |---|---|
-| [`submissions/smart_octnovdec_sev_trend.csv`](submissions/smart_octnovdec_sev_trend.csv) | **Submission final.** Severitas Okt–Des dikalibrasi mengikuti tren YoY +8,4 % yang terobservasi di H1 2025 |
+| [`submissions/smart_octnovdec_sev_trend.csv`](submissions/smart_octnovdec_sev_trend.csv) | **Submission final yang dipilih** — skor 0,22877. Severitas Okt–Des dikalibrasi mengikuti tren YoY +8,4 % yang terobservasi di H1 2025 |
+| [`submissions/final6_sep089_octnov_small.csv`](submissions/final6_sep089_octnov_small.csv) | Kandidat yang **tidak dipilih**, ternyata lebih baik (lihat catatan di bawah) |
 | [`submissions/phase4_aug_freq104_sep122.csv`](submissions/phase4_aug_freq104_sep122.csv) | Baseline sebelum kalibrasi, hasil *leaderboard probing* |
 | [`submissions/sample_submission.csv`](submissions/sample_submission.csv) | Skema format |
 
 Kalibrasi berangkat dari temuan bahwa 5 dari 6 bulan di H1 2025 mencatat kenaikan severitas YoY (median +8,4 %), sementara model justru memprediksi penurunan di Q4 — konsekuensi dari data latih yang hanya mencakup 12 bulan penuh.
+
+#### Kandidat yang terlewat
+
+Setelah private leaderboard dibuka, `final6_sep089_octnov_small.csv` ternyata mengungguli submission yang dipilih. Perbedaannya terutama di **frekuensi** — kandidat ini konsisten memprediksi lebih rendah:
+
+| | final6 (tidak dipilih) | smart_octnovdec (dipilih) |
+|---|---|---|
+| Frekuensi Agt–Des | 213 / 207 / 226 / 225 / 214 | 221 / 252 / 238 / 236 / 225 |
+| Severitas (juta Rp) | 48,8 / 43,3 / 46,4 / 48,8 / 46,7 | 48,8 / 42,8 / 50,0 / 54,9 / 54,5 |
+| Total (miliar Rp) | 10,4 / 8,95 / 10,5 / 11,0 / 9,99 | 10,8 / 10,8 / 11,9 / 13,0 / 12,2 |
+
+Selisih terbesar ada di September: 207 vs 252 klaim. Model memprediksi lonjakan September yang tidak terjadi, dan kalibrasi severitas +8,4 % di Okt–Des ternyata terlalu agresif — dua koreksi yang justru menjauhkan dari nilai aktual. Pelajaran yang bisa diambil: kalibrasi manual berbasis tren YoY dari 6 bulan observasi membawa risiko *overcorrection* yang tidak terdeteksi oleh validasi mana pun yang tersedia saat itu.
+
+Skor persis `final6` tidak tercatat di arsip ini (angka di `docs/` berasal dari skala leaderboard fase probing, bukan metrik final).
 
 ## Struktur repo
 
