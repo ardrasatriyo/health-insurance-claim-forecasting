@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------------------
+# DATA RAHASIA — jangan pernah di-commit.
+# Dataset klaim & polis milik AXA Financial Indonesia, disediakan hanya untuk
+# keperluan lomba DSC MCF ITB 2026. Lihat data/README.md.
+# ---------------------------------------------------------------------------
+Data_Klaim.csv
+Data_Polis.csv
+data/*.csv
+data/*.xlsx
+*.parquet
+
+# Environment
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Artefak training
+catboost_info/
+*.pkl
+*.joblib
+*.txt.model
+lightgbm.log
+
+# macOS / Office
+.DS_Store
+~$*.docx
+~$*.xlsx
+
+# Notebook checkpoints
+.ipynb_checkpoints/

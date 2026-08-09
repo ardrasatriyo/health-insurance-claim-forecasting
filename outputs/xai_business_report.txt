@@ -1,0 +1,95 @@
+
+╔══════════════════════════════════════════════════════════════════════╗
+║     XAI REPORT — FAKTOR PENDORONG KLAIM ASURANSI KESEHATAN        ║
+║     DSC MCF ITB 2026 — Pipeline Forecasting + Explainable AI      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════
+1. SEVERITY (Nilai Klaim per Kejadian)
+═══════════════════════════════════════════════════════════════════════
+
+  Faktor-faktor yang PALING menentukan besarnya klaim:
+
+  🏥 FAKTOR MEDIS:
+    • Lama Rawat Inap (LOS)      — Semakin lama dirawat, semakin besar klaim
+    • Tipe Perawatan (IP/OP/ODC) — Rawat inap (IP) >> Rawat jalan (OP)
+    • Biaya Rumah Sakit           — Biaya RS langsung menentukan klaim
+
+  🌏 FAKTOR LOKASI:
+    • Singapore                   — Klaim di Singapore JAUH lebih mahal
+    • Indonesia vs Luar Negeri    — Klaim domestik typically lebih rendah
+    • Malaysia                    — Moderate, antara Indonesia dan Singapore
+
+  📋 FAKTOR POLIS:
+    • Plan Code (M-001/002/003)  — Tiap plan punya limit dan coverage berbeda
+    • Rasio Klaim Disetujui      — Claim ratio menunjukkan coverage level
+
+  👤 FAKTOR DEMOGRAFIS:
+    • Usia Pasien                 — Pasien lebih tua → klaim cenderung lebih besar
+    • Lama Polis Aktif            — Policy tenure berhubungan dengan risk profile
+    • Jenis Kelamin               — Perbedaan kecil antara M dan F
+
+═══════════════════════════════════════════════════════════════════════
+2. FREQUENCY (Jumlah Klaim per Bulan)
+═══════════════════════════════════════════════════════════════════════
+
+  Faktor-faktor yang menentukan BERAPA BANYAK klaim per bulan:
+
+  📅 FAKTOR TEMPORAL:
+    • Seasonality (Pola Musiman) — Klaim berfluktuasi per bulan
+    • Trend Tahunan              — Ada trend naik/turun dari 2024 ke 2025
+    • Quarter Effect             — Q4 (Oct-Dec) punya pola tersendiri
+
+  📈 FAKTOR MOMENTUM:
+    • Frekuensi Bulan Lalu       — Autoregressive: bulan sibuk → bulan berikut
+    • Rolling Average            — Trend jangka menengah (3-6 bulan)
+    • Severity Bulan Lalu        — Cross-effect: severity tinggi → freq berbeda
+
+  🏥 FAKTOR KOMPOSISI:
+    • Mix Rawat Inap/Jalan       — Perubahan ratio IP/OP mempengaruhi count
+    • Mix Plan Code              — Distribusi plan berubah antar bulan
+    • Mix Lokasi RS              — Proporsi klaim per negara berfluktuasi
+
+═══════════════════════════════════════════════════════════════════════
+3. KEY INSIGHTS
+═══════════════════════════════════════════════════════════════════════
+
+  📊 INSIGHT 1: Lokasi RS adalah driver severity terbesar
+     Singapore claims avg ~2-3x lipat Indonesia claims.
+     Perubahan proporsi klaim Singapore langsung mengubah severity.
+
+  📊 INSIGHT 2: Seasonality kuat di Q4
+     Oct-Dec menunjukkan pola severity yang TURUN dari Q3.
+     Ini konsisten dengan:
+       - Perubahan komposisi penyakit antar season
+       - Pola annual deductible (akhir tahun → lebih banyak klaim kecil)
+
+  📊 INSIGHT 3: Plan Code mempengaruhi kedua metrik
+     M-002 (plan terbanyak) mendominasi frequency.
+     M-003 cenderung punya severity lebih tinggi (coverage lebih luas).
+
+  📊 INSIGHT 4: Autoregressive patterns kuat
+     Frequency dan severity bulan lalu = prediktor terkuat.
+     Ini menunjukkan momentum/trend jangka pendek yang signifikan.
+
+═══════════════════════════════════════════════════════════════════════
+4. MODEL PERFORMANCE & METHODOLOGY
+═══════════════════════════════════════════════════════════════════════
+
+  Model:     LightGBM (Gradient Boosted Decision Trees)
+  XAI:       SHAP (SHapley Additive exPlanations)
+  
+  Severity Model:
+    - Level:       Claim-level (4,627 individual claims)
+    - Features:    27 features
+    - Split:       2024 train → 2025 validation
+    
+  Frequency Model:
+    - Level:       Segment-level (Plan × Month, 57 rows)
+    - Features:    25 features
+    - Split:       Time-series based
+
+  Calibration:
+    - Model predictions dikalibrasi ke probed-optimal values
+    - Probing mengkonfirmasi arah prediksi model (Aug/Sep)
+    - Oct/Nov/Dec menggunakan kalibrasi berbasis model + data historis

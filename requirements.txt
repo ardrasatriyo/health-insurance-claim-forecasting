@@ -1,0 +1,11 @@
+# Versi persis dari virtualenv yang dipakai saat kompetisi (Python 3.14).
+# Notebook dan skrip di repo ini dijalankan dengan kombinasi ini pada Maret 2026.
+pandas==3.0.1
+numpy==2.4.2
+scipy==1.17.0
+scikit-learn==1.8.0
+lightgbm==4.6.0
+xgboost==3.2.0
+shap==0.50.0
+matplotlib==3.10.8
+seaborn==0.13.2

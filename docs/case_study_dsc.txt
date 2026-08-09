@@ -1,0 +1,98 @@
+Data Science Competition ITB 2026
+Study Case by AXA Financial Indonesia
+
+==========================================================
+1. Latar Belakang
+==========================================================
+
+Produk asuransi kesehatan individu merupakan salah satu alat untuk mitigasi resiko finansial individu dari kejadian tidak terduga seperti penyakit atau kecelakaan, yang berpotensi menimbulkan biaya besar dan berdampak ke perencaan keuangan pribadi.
+
+Salah satu isu yang terjadi beberapa tahun terakhir ini, adalah terkait peningkatan klaim asuransi kesehatan individu, dimana terjadi kenaikan sebesar 25.5% antara periode Januari – Juni 2025 jika dibandingkan periode yang sama di tahun 2024. Adapun peningkatan klaim tersebut akan berdampak ke penyesuaian premi yang berpotensi mengakibatkan harga premi produk asuransi kesehatan individu menjadi lebih tidak terjangkau.
+
+Oleh karena itu, diperlukan analisa berbasis data untuk memprediksi faktor-faktor yang paling berpengaruh terhadap nilai klaim, sehingga dapat dilakukan inisiatif baik dari segi seleksi resiko, pencegahan, ataupun deteksi dini untuk meminimalisir dampak peningkatan klaim guna menjaga harga premi yang terjangkau.
+
+==========================================================
+2. Tujuan
+==========================================================
+
+Peserta diharapkan dapat melakukan:
+1. Eksplorasi dan pembersihan data klaim asuransi kesehatan
+2. Mengidentifikasi faktor-faktor yang paling mempengaruhi severitas dari klaim asuransi kesehatan
+3. Mengidentifikasi faktor-faktor yang paling mempengaruhi frekuensi dari klaim asuransi kesehatan
+4. Membuat model machine learning yang dapat memprediksi a) trend frekuensi, b) trend severitas, dan c) trend nominal klaim berdasarkan data klaim yang tersedia
+5. Evaluasi performa setidaknya 2 (dua) model machine learning
+
+==========================================================
+3. Dataset
+==========================================================
+
+Dataset terdiri dari 4096 data polis asuransi kesehatan dan 5781 data klaim asuransi kesehatan yang terjadi pada periode 1 Januari 2024 s/d 31 Desember 2025.
+
+Terdapat 5 informasi yang diberikan terkait data polis, yaitu: nomor polis, plancode, gender, tanggal lahir, tanggal efektif polis, dan domisili, dan terdapat 13 informasi yang diberikan terkait data klaim asuransi kesehatan, yaitu: claim ID, nomor polis, reimburse/cashless, inpatient/outpatient, ICD Diagnosis, ICD Description, status klaim, tanggal pembayaran, tanggal pasien masuk RS, tanggal pasien keluar RS, nominal klaim yang disetujui, nominal biaya RS yang terjadi, dan lokasi RS.
+
+==========================================================
+4. Tugas Peserta
+==========================================================
+
+a. Preprocessing & Eksplorasi Data Analysis
+   - Identifikasi data dengan faktor tidak lengkap dan outlier yang berpotensi mempengaruhi performa model
+   - Visualisasi hubungan antara faktor yang tersedia dengan klaim asuransi kesehatan dengan baik menggunakan histogram, scatter plot, box plot ataupun heatmap.
+   - Normalisasi data dan feature engineering
+
+b. Pembuatan Model Machine Learning
+   - Gunakan minimal 2 model berbeda untuk pemodelan machine learning
+   - Cross validasi & evaluasi model menggunakan metriks yang sesuai
+
+c. Analisa Hasil & Evaluasi Performa Model Machine Learning
+   - Identifikasi faktor paling berpengaruh ke a) severitas klaim, b) frekuensi klaim, dan c) nominal klaim
+   - Perbandingan hasil dengan dan tanpa feature engineering
+   - Berikan hasil prediksi klaim di tahun 2026 baik dari segi a) severitas klaim, b) frekuensi klaim, dan c) nominal klaim & berikan rekomendasi dari hasil prediksi
+
+==========================================================
+5. Kriteria Penilaian
+==========================================================
+
+- Kualitas Eksplorasi Data Analysis, termasuk teknik preprocessing dan feature engineering (20%)
+- Pembuatan dan pemilihan model machine learning (25%)
+- Evaluasi Performa Model Machine Learning (25%)
+- Prediksi klaim asuransi kesehatan individu dan rekomendasi (30%)
+
+==========================================================
+6. Catatan Tambahan — Tugas Prediksi
+==========================================================
+
+Pada DSC MCF ITB, untuk komponen penilaian skor Kaggle, peserta ditantang untuk membangun model prediktif yang mampu memprediksi trend frekuensi, trend severitas, dan tren total claim. untuk periode Agustus hingga Desember 2025.
+
+Peserta diwajibkan untuk mengirimkan file prediksi melalui kaggle dalam format CSV dengan struktur sebagai berikut:
+
+Id, value
+2025-08_Claim_Frequency,0
+2025-08_Claim_Severity,0
+2025-08_Total_Claim,0
+2025-09_Claim_Frequency,0
+
+Penting dipahami, meskipun submission di Kaggle berupa prediksi hingga 2025, fokus utama analisis Anda tetap harus pada prediksi frekuensi, severitas dan nominal klaim level portofolio untuk tahun 2026, sesuai dengan yang diminta pada study case yang ada di atas.
+
+==========================================================
+7. Metrik Evaluasi
+==========================================================
+
+Metrik yang digunakan untuk mengevaluasi performa model pada kompetisi Kaggle ini adalah Mean Absolute Percentage Error:
+
+MAPE = (1/n) * Σ |( y_i - ŷ_i ) / y_i|
+
+Perhitungan Skor Akhir:
+1. Hitung MAPE untuk prediksi Frekuensi: MAPE_freq
+2. Hitung MAPE untuk prediksi Severitas: MAPE_sev
+3. Hitung MAPE untuk prediksi Total: MAPE_total
+4. Skor Akhir = (MAPE_freq + MAPE_sev + MAPE_total) / 3
+
+MAPE dipilih karena MAPE fokus pada persentase kesalahan relatif terhadap nilai aktual, bukan error absolut. Ini sangat sesuai dengan kebutuhan bisnis asuransi yang peduli pada akurasi proporsi prediksi, bukan hanya selisih nominal. Selain itu, dengan menghitung MAPE secara terpisah untuk frekuensi, severitas, dan total klaim, sistem penilaian ini mendorong peserta untuk membangun model yang akurat di semua aspek, bukan hanya fokus pada satu komponen saja.
+
+==========================================================
+8. Catatan Penting
+==========================================================
+
+- Konten dari Notebook harus menjawab semua tugas yang terdapat pada case document.
+- Konten dari Laporan adalah menjelaskan proses, analisis, interpretasi, dll. yang terdapat pada Notebook.
+- File submisi yang dikumpulkan harus dapat di-reproduce dari notebook yang dikumpulkan.

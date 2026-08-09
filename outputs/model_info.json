@@ -1,0 +1,111 @@
+{
+  "freq_mape": 4.77741974441255,
+  "sev_mape": 2.7252854887978573,
+  "n_features_freq": 60,
+  "n_features_sev": 60,
+  "n_training_months": 19,
+  "freq_top_features": [
+    {
+      "feature": "n_unique_icd",
+      "mean_abs_shap": 1.0977482776068848,
+      "rank": 1
+    },
+    {
+      "feature": "freq_roll6_mean",
+      "mean_abs_shap": 0.526107860376754,
+      "rank": 2
+    },
+    {
+      "feature": "ip_ratio",
+      "mean_abs_shap": 0.0,
+      "rank": 3
+    },
+    {
+      "feature": "reimburse_ratio",
+      "mean_abs_shap": 0.0,
+      "rank": 4
+    },
+    {
+      "feature": "avg_los",
+      "mean_abs_shap": 0.0,
+      "rank": 5
+    },
+    {
+      "feature": "median_los",
+      "mean_abs_shap": 0.0,
+      "rank": 6
+    },
+    {
+      "feature": "avg_billed",
+      "mean_abs_shap": 0.0,
+      "rank": 7
+    },
+    {
+      "feature": "median_billed",
+      "mean_abs_shap": 0.0,
+      "rank": 8
+    },
+    {
+      "feature": "std_billed",
+      "mean_abs_shap": 0.0,
+      "rank": 9
+    },
+    {
+      "feature": "avg_approved",
+      "mean_abs_shap": 0.0,
+      "rank": 10
+    }
+  ],
+  "sev_top_features": [
+    {
+      "feature": "avg_billed",
+      "mean_abs_shap": 1846453.611995842,
+      "rank": 1
+    },
+    {
+      "feature": "avg_approved",
+      "mean_abs_shap": 531653.2518797914,
+      "rank": 2
+    },
+    {
+      "feature": "freq_lag3",
+      "mean_abs_shap": 121600.11068017824,
+      "rank": 3
+    },
+    {
+      "feature": "p75_approved",
+      "mean_abs_shap": 95052.4169296976,
+      "rank": 4
+    },
+    {
+      "feature": "sev_roll6_mean",
+      "mean_abs_shap": 85049.2835874076,
+      "rank": 5
+    },
+    {
+      "feature": "loc_ratio_Singapore",
+      "mean_abs_shap": 71918.85406708693,
+      "rank": 6
+    },
+    {
+      "feature": "plan_ratio_M-003",
+      "mean_abs_shap": 66602.54266004988,
+      "rank": 7
+    },
+    {
+      "feature": "p25_approved",
+      "mean_abs_shap": 49953.41355997501,
+      "rank": 8
+    },
+    {
+      "feature": "ip_ratio",
+      "mean_abs_shap": 0.0,
+      "rank": 9
+    },
+    {
+      "feature": "reimburse_ratio",
+      "mean_abs_shap": 0.0,
+      "rank": 10
+    }
+  ]
+}

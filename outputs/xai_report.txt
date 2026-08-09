@@ -1,0 +1,64 @@
+======================================================================
+XAI REPORT: FAKTOR-FAKTOR BERPENGARUH DALAM KLAIM ASURANSI
+======================================================================
+
+Pipeline: DSC MCF ITB 2026 — Forecasting + XAI
+Generated: 2026-03-11 07:15:04
+
+======================================================================
+1. CLAIM FREQUENCY (Jumlah Klaim per Bulan)
+======================================================================
+
+Top 10 Faktor yang Mempengaruhi Frekuensi Klaim:
+
+  # 1. Jumlah diagnosis unik                         (SHAP=1.1)
+  # 2. Rata-rata frekuensi 6 bulan terakhir          (SHAP=0.5)
+  # 3. Rasio pasien rawat inap                       (SHAP=0.0)
+  # 4. Rasio klaim reimburse                         (SHAP=0.0)
+  # 5. Rata-rata lama rawat inap                     (SHAP=0.0)
+  # 6. median_los                                    (SHAP=0.0)
+  # 7. Rata-rata biaya RS                            (SHAP=0.0)
+  # 8. median_billed                                 (SHAP=0.0)
+  # 9. std_billed                                    (SHAP=0.0)
+  #10. avg_approved                                  (SHAP=0.0)
+
+======================================================================
+2. CLAIM SEVERITY (Rata-rata Nilai Klaim per Bulan)
+======================================================================
+
+Top 10 Faktor yang Mempengaruhi Severity Klaim:
+
+  # 1. Rata-rata biaya RS                            (SHAP=1846453.6)
+  # 2. avg_approved                                  (SHAP=531653.3)
+  # 3. freq_lag3                                     (SHAP=121600.1)
+  # 4. p75_approved                                  (SHAP=95052.4)
+  # 5. Rata-rata severity 6 bulan terakhir           (SHAP=85049.3)
+  # 6. loc_ratio_Singapore                           (SHAP=71918.9)
+  # 7. plan_ratio_M-003                              (SHAP=66602.5)
+  # 8. p25_approved                                  (SHAP=49953.4)
+  # 9. Rasio pasien rawat inap                       (SHAP=0.0)
+  #10. reimburse_ratio                               (SHAP=0.0)
+
+======================================================================
+3. INTERPRETASI BISNIS
+======================================================================
+
+  FREQUENCY dipengaruhi oleh:
+    • Seasonality (pola bulan) — klaim cenderung naik/turun di bulan tertentu
+    • Trend historis — frekuensi bulan-bulan sebelumnya menjadi prediktor kuat
+    • Rasio rawat inap — lebih banyak rawat inap = frekuensi berbeda
+
+  SEVERITY dipengaruhi oleh:
+    • Nilai klaim historis — severity masa lalu prediksi masa depan
+    • Komposisi klaim — rasio rawat inap, jenis plan, lokasi RS
+    • Distribusi klaim — variasi dan skewness menunjukkan tail risk
+
+======================================================================
+4. IMPLIKASI UNTUK PREDIKSI
+======================================================================
+
+  • Model menangkap pola SEASONAL yang kuat — Oct/Nov/Dec memiliki
+    karakteristik berbeda dari Aug/Sep
+  • Lag features dominan → model bersifat autoregressive
+  • Composition features (IP ratio, plan mix) menunjukkan perubahan
+    campuran klaim mempengaruhi severity
